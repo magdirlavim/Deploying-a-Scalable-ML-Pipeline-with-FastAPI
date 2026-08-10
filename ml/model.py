@@ -137,6 +137,7 @@ def performance_on_categorical_slice(
         lb = lb
     )
     
-    preds = None # your code here to get prediction on X_slice using the inference function
+    # get predictions and compute metrics for this slice
+    preds = inference(model, X_slice)
     precision, recall, fbeta = compute_model_metrics(y_slice, preds)
     return precision, recall, fbeta

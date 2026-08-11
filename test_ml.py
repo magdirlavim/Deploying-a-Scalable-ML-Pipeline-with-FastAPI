@@ -1,28 +1,46 @@
 import pytest
-# TODO: add necessary import
+from sklearn.model_selection import train_test_split
 
-# TODO: implement the first test. Change the function name and input as needed
+from ml.data import process_data
+from ml.model import train_model, inference, compute_model_metrics
+
+
 def test_one():
     """
-    # add description for the first test
+    Test that train_model returns a fitted model with a predict method
     """
-    # Your code here
-    pass
+    # Small toy dataset just to confirm the function trains a real model
+    X_train = [[0, 1], [1, 0], [1, 1], [0, 0]]
+    y_train = [1, 0, 1, 0]
+    model = train_model(X_train, y_train)
+    # Model should exist and be able to make predictions
+    assert model is not None
+    assert hasattr(model, "predict")
 
 
-# TODO: implement the second test. Change the function name and input as needed
 def test_two():
     """
-    # add description for the second test
+    Test that inference returns predictions of the expected length
     """
-    # Your code here
-    pass
+    # Reuse the same toy dataset to train a quick model
+    X_train = [[0, 1], [1, 0], [1, 1], [0, 0]]
+    y_train = [1, 0, 1, 0]
+    model = train_model(X_train, y_train)
+    # Predictions should have one value per input row
+    preds = inference(model, X_train)
+    assert len(preds) == len(y_train)
+    
 
 
-# TODO: implement the third test. Change the function name and input as needed
 def test_three():
     """
-    # add description for the third test
+    Test that compute_model_metrics returns expected values for a known input.
     """
-    # Your code here
-    pass
+    # Predictions perfectly match the true labels here
+    y = [1, 1, 0, 0]
+    preds = [1, 1, 0, 0]
+    precision, recall, fbeta = compute_model_metrics(y, preds)
+    # A perfect match should give a perfect score on all three metrics
+    assert precision == 1.0
+    assert recall == 1.0
+    assert fbeta == 1.0

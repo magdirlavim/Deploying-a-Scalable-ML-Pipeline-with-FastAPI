@@ -126,7 +126,7 @@ def performance_on_categorical_slice(
 
     """
     # Filter data down to just the rows matching slice_value
-    slice_df = data[data[column_name]] == slice_value]
+    slice_df = data[data[column_name] == slice_value]
     # Process the slice using the already-fitted encoder and binarizer
     X_slice, y_slice, _, _ = process_data(
         slice_df,
